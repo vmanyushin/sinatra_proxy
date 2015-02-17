@@ -8,7 +8,7 @@ configure do
 end
 
 get '/*' do
-    @request_host = request.host
+    @dn = request.host
 
     #request.body              # request body sent by the client (see below)
     #request.scheme            # "http"

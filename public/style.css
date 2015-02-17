@@ -1,0 +1,52 @@
+body {
+    background: #0e0e0e;
+    color: #212121;
+    font: 13px Tahoma;
+    margin: auto;
+	width: 400px;
+}
+
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+color: #eb0000;
+text-decoration: underline;
+}
+
+.header {
+background: url(img/head.gif) repeat-x top #181918;
+height: 69px;
+}
+
+
+.glavnoe {
+background: url(img/glav.gif) repeat-x top #d1d1d1;
+padding: 15px 5px;
+text-align: center;
+}
+
+.glavnoe h2 {
+color: #bf0000;
+font-size: 15px;
+margin: 4px 0;
+display: inline;
+}
+
+.glavnoe h3 {
+font-size: 14px;
+margin: 0;
+}
+
+img.flash {
+max-width: 300px;
+margin: 12px 0;
+}
+
+.copy {
+color: #646464;
+margin-top: 10px;
+}
