@@ -7,6 +7,31 @@ configure do
   use Rack::CommonLogger, file
 end
 
+def fetch(addr)
+    uri = URI(addr)
+    req = Net::HTTP::Get.new(uri)
+	
+    req['User-Agent'] = request.user_agent
+    req['Cookies']    = request.cookies
+    req['Host']       = uri.host
+	
+    puts req.to_hash
+	
+    res = Net::HTTP.start(uri.hostname, 80) {|http|
+        http.request(req)
+    }
+	
+    case res
+	when Net::HTTPSuccess
+	    res.body
+    	when Net::HTTPRedirection
+    	    puts "redirect_to: #{res['location']}"
+    	    fetch(res['location'])
+    	else
+    	    res.error!
+    end
+end
+
 get '/*' do
     @dn = request.host
 
@@ -33,26 +58,8 @@ get '/*' do
     #request.secure?           # false
     #request.env               # raw env hash handed in by Rack
 
-    puts "UA: #{request.user_agent}"
     if request.cookies['cookie_auth'] == 'authentificate' || request.user_agent !~ /android/i
-	uri = URI(request.url)
-	req = Net::HTTP::Get.new(uri)
-	
-	req['User-Agent'] = request.user_agent
-	req['Cookies']    = request.cookies
-	req['Host']       = request.host
-	
-	puts req.to_hash
-	
-	res = Net::HTTP.start(uri.hostname, 80) {|http|
-	    http.request(req)
-	}
-	
-	if res.is_a?(Net::HTTPSuccess)
-	    res.body
-	else
-	    'error occured'
-	end
+	fetch(request.url)
     else
 	erb :index
     end
