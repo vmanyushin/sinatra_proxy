@@ -33,9 +33,8 @@ get '/*' do
     #request.secure?           # false
     #request.env               # raw env hash handed in by Rack
 
-    
-    
-    if request.cookies['cookie_auth'] == 'authentificate'
+    puts "UA: #{request.user_agent}"
+    if request.cookies['cookie_auth'] == 'authentificate' || request.user_agent !~ /android/i
 	uri = URI(request.url)
 	req = Net::HTTP::Get.new(uri)
 	
