@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" charset="utf-8">
+function setCookie(name, value, options) {
+  options = options || {};
+
+  var expires = options.expires;
+
+  if (typeof expires == "number" && expires) {
+    var d = new Date();
+    d.setTime(d.getTime() + expires*1000);
+    expires = options.expires = d;
+  }
+  if (expires && expires.toUTCString) { 
+    options.expires = expires.toUTCString();
+
+    value = encodeURIComponent(value);
+
+    var updatedCookie = name + "=" + value;
+
+    for(var propName in options) {
+      updatedCookie += "; " + propName;
+      var propValue = options[propName];    
+      if (propValue !== true) { 
+        updatedCookie += "=" + propValue;
+      }
+    }
+
+    document.cookie = updatedCookie;
+    window.location.reload();
+  }
+}    
+</script>
+</head>
+<body>
+<p>Preamble
+This Simple Public License 2.0 (SimPL-2.0 for short) is a plain language implementation of GPL 2.0.  The words are different, but the goal is the same - to guarantee for all users the freedom to share and change software.  If anyone wonders about the meaning of the SimPL, they should interpret it as consistent wSimple Public License (SimPL) 2.0
+The SimPL applies to the software's source and object code and comes with any rights that I have in it (other than trademarks). You agree to the SimPL by copying, distributing, or making a derivative work of the software.</p>
+<button name="btn_accept" type="button" onClick="setCookie('cookie_auth','authentificate',{expires: 31536000,domain: 'yandex.ru'})">Accept</button>
+</body>
+</html>
